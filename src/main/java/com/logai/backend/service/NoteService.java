@@ -32,7 +32,9 @@ public class NoteService{
         Note note = repo.findById(id).orElseThrow();
         note.setTitle(updatedNote.getTitle());
         note.setDescription(updatedNote.getDescription());
-        note.setUpdatedAt(java.time.LocalDateTime.now());
+        note.setUpdatedAt(java.util.Date.from(java.time.LocalDateTime.now()
+                .atZone(java.time.ZoneId.systemDefault())
+                .toInstant()));
         return repo.save(note);
     }
 
